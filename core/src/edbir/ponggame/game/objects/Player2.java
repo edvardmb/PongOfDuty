@@ -30,4 +30,7 @@ public class Player2 extends PlayerPaddle {
     public float getY(){
         return this.y;
     }
+    public float getScore(){
+        return this.score;
+    }
 }

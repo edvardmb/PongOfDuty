@@ -45,7 +45,7 @@ public class Ball {
         y = body.getPosition().y * Const.PPM - (width/ 2);
         bounceY();
 
-       /* if( x < 0 ){
+        if( x < 0 ){
             gameScreen.getPlayer2().score();
             this.reset();
         }
@@ -53,16 +53,17 @@ public class Ball {
         if( x > Application.INSTANCE.getScreenWidth()){
             gameScreen.getPlayer1().score();
             this.reset();
-        }*/
+        }
 
         Player1 p1 = gameScreen.getPlayer1();
         Player2 p2 = gameScreen.getPlayer2();
 
-
         if((this.x-(this.width/2+1) < p1.getX() + (p1.width/2) && (this.y - (this.height/2) >= p1.getY() - (p1.height/2) && this.y + (this.height/2) <= p1.getY()+(p1.height/2)))){
             this.velX = -velX;
         }
-
+        /*if((this.x+(this.width/2+1) > p2.getX() + (p2.width/2) && (this.y - (this.height/2) >= p2.getY() - (p2.height/2) && this.y + (this.height/2) <= p2.getY()+(p2.height/2)))){
+            this.velX = -velX;
+        }*/
 
         this.body.setLinearVelocity(velX * speed ,velY * speed);
 

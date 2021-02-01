@@ -3,8 +3,10 @@ package edbir.ponggame.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -29,6 +31,9 @@ public class GameScreen extends ScreenAdapter {
     private Ball ball;
     private Wall wallTop, wallBottom;
 
+    BitmapFont font, font2;
+
+
 
     public GameScreen(OrthographicCamera camera){
         this.camera = camera;
@@ -42,6 +47,14 @@ public class GameScreen extends ScreenAdapter {
         this.ball = new Ball( this);
         this.wallTop = new Wall(32, this);
         this.wallBottom = new Wall(Application.INSTANCE.getScreenHeight()-32, this);
+
+        font = new BitmapFont();
+        font2 = new BitmapFont();
+        font.setColor(Color.RED);
+        font.getData().setScale(2,2);
+        font2.setColor(Color.BLACK);
+
+
     }
 
     public World getWorld() {
@@ -73,9 +86,11 @@ public class GameScreen extends ScreenAdapter {
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
             this.ball.reset();
+
         }
 
     }
+
 
     @Override
     public void render(float delta){
@@ -90,6 +105,10 @@ public class GameScreen extends ScreenAdapter {
         this.ball.render(batch);
         this.wallTop.render(batch);
         this.wallBottom.render(batch);
+        font.draw(batch, (int) player1.getScore() + " - " +  (int) player2.getScore() , Application.INSTANCE.getScreenWidth()/2 ,Application.INSTANCE.getScreenHeight() -20    );
+        font2.draw(batch, "Control left side with W and S " , 20,40 );
+        font2.draw(batch, "Control left side with up and down " , Application.INSTANCE.getScreenWidth()/2 + 240  ,40);
+
         batch.end();
 
     }
