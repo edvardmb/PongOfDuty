@@ -34,6 +34,10 @@ public abstract class PlayerPaddle {
         velY = 0;
     }
 
+    public void score(){
+        this.score ++;
+    }
+
     public void render(SpriteBatch batch){
         batch.draw(texture, x, y, width, height);
     }

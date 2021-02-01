@@ -48,6 +48,18 @@ public class GameScreen extends ScreenAdapter {
         return world;
     }
 
+    public Player1 getPlayer1() {
+        return player1;
+    }
+
+    public Player2 getPlayer2() {
+        return player2;
+    }
+
+    public Ball getBall() {
+        return ball;
+    }
+
     public void update(){
         world.step(1/60f, 6, 2);
         batch.setProjectionMatrix(camera.combined);
@@ -62,6 +74,7 @@ public class GameScreen extends ScreenAdapter {
         if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
             this.ball.reset();
         }
+
     }
 
     @Override
@@ -78,5 +91,8 @@ public class GameScreen extends ScreenAdapter {
         this.wallTop.render(batch);
         this.wallBottom.render(batch);
         batch.end();
+
     }
+
+
 }

@@ -24,7 +24,7 @@ public class Ball {
         this.x = Application.INSTANCE.getScreenWidth()/2;
         this.y = Application.INSTANCE.getScreenHeight()/2;
         this.speed = 5;
-
+        this.gameScreen = gameScreen;
         this.texture = new Texture("white.png");
 
         this.velX = getRandomDirection();
@@ -34,7 +34,6 @@ public class Ball {
         this.height = 32;
 
         this.body = BodyHelper.createBody(x, y, width, height, false, 0, gameScreen.getWorld(), ContactType.BALL);
-
     }
 
     private float getRandomDirection(){
@@ -44,10 +43,36 @@ public class Ball {
     public void update(){
         x = body.getPosition().x * Const.PPM - (width/ 2);
         y = body.getPosition().y * Const.PPM - (width/ 2);
+        bounceY();
+
+       /* if( x < 0 ){
+            gameScreen.getPlayer2().score();
+            this.reset();
+        }
+
+        if( x > Application.INSTANCE.getScreenWidth()){
+            gameScreen.getPlayer1().score();
+            this.reset();
+        }*/
+
+        Player1 p1 = gameScreen.getPlayer1();
+        Player2 p2 = gameScreen.getPlayer2();
+
+
+        if((this.x-(this.width/2+1) < p1.getX() + (p1.width/2) && (this.y - (this.height/2) >= p1.getY() - (p1.height/2) && this.y + (this.height/2) <= p1.getY()+(p1.height/2)))){
+            this.velX = -velX;
+        }
+
 
         this.body.setLinearVelocity(velX * speed ,velY * speed);
 
         //score
+    }
+
+    public void bounceY() {
+        if (this.y + height > Gdx.graphics.getHeight() - 65 || this.y < 65) {
+            this.velY = -this.velY;
+        }
     }
 
     public void reset() {
@@ -60,4 +85,5 @@ public class Ball {
         batch.draw(texture, x, y, width, height);
 
     }
+
 }
