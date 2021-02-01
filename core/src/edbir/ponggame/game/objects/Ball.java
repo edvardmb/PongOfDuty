@@ -58,16 +58,17 @@ public class Ball {
         Player1 p1 = gameScreen.getPlayer1();
         Player2 p2 = gameScreen.getPlayer2();
 
-        if((this.x-(this.width/2+1) < p1.getX() + (p1.width/2) && (this.y - (this.height/2) >= p1.getY() - (p1.height/2) && this.y + (this.height/2) <= p1.getY()+(p1.height/2)))){
+
+        if(this.x-(this.width/2) <= p1.getX() + (p1.width/2) && (this.y + (this.height/2) >= p1.getY() - (p1.height/2) && this.y - (this.height/2) <= p1.getY()+(p1.height/2))){
             this.velX = -velX;
+            incSpeed();
         }
-        /*if((this.x+(this.width/2+1) > p2.getX() + (p2.width/2) && (this.y - (this.height/2) >= p2.getY() - (p2.height/2) && this.y + (this.height/2) <= p2.getY()+(p2.height/2)))){
+        if(this.x+(this.width) >= p2.getX() - (p2.width/2) && (this.y + (this.height/2) >= p2.getY() - (p2.height/2) && this.y - (this.height/2) <= p2.getY()+(p2.height/2))){
             this.velX = -velX;
-        }*/
+            incSpeed();
+        }
 
         this.body.setLinearVelocity(velX * speed ,velY * speed);
-
-        //score
     }
 
     public void bounceY() {
@@ -85,6 +86,10 @@ public class Ball {
     public void render(SpriteBatch batch){
         batch.draw(texture, x, y, width, height);
 
+    }
+
+    public void incSpeed(){
+        this.speed *= 1.1f;
     }
 
 }
