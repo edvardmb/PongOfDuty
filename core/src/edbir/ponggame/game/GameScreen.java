@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import edbir.ponggame.game.objects.Ball;
 import edbir.ponggame.game.objects.Player1;
 import edbir.ponggame.game.objects.Player2;
+import edbir.ponggame.game.objects.Wall;
 
 public class GameScreen extends ScreenAdapter {
 
@@ -26,6 +27,7 @@ public class GameScreen extends ScreenAdapter {
     private Player1 player1;
     private Player2 player2;
     private Ball ball;
+    private Wall wallTop, wallBottom;
 
 
     public GameScreen(OrthographicCamera camera){
@@ -38,6 +40,8 @@ public class GameScreen extends ScreenAdapter {
         this.player1 = new Player1(16, Application.INSTANCE.getScreenHeight() / 2, this);
         this.player2 = new Player2(944, Application.INSTANCE.getScreenHeight() / 2, this);
         this.ball = new Ball( this);
+        this.wallTop = new Wall(32, this);
+        this.wallBottom = new Wall(Application.INSTANCE.getScreenHeight()-32, this);
     }
 
     public World getWorld() {
@@ -55,10 +59,6 @@ public class GameScreen extends ScreenAdapter {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             Gdx.app.exit();
         }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-            Gdx.app.exit();
-        }
         if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
             this.ball.reset();
         }
@@ -70,11 +70,13 @@ public class GameScreen extends ScreenAdapter {
 
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         batch.begin();
         this.player1.render(batch);
         this.player2.render(batch);
         this.ball.render(batch);
-
+        this.wallTop.render(batch);
+        this.wallBottom.render(batch);
         batch.end();
     }
 }
