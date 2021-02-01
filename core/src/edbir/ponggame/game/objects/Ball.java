@@ -23,7 +23,7 @@ public class Ball {
     public Ball(GameScreen gameScreen){
         this.x = Application.INSTANCE.getScreenWidth()/2;
         this.y = Application.INSTANCE.getScreenHeight()/2;
-        this.speed = 100;
+        this.speed = 5;
         this.gameScreen = gameScreen;
         this.texture = new Texture("white.png");
 
@@ -58,12 +58,15 @@ public class Ball {
         Player1 p1 = gameScreen.getPlayer1();
         Player2 p2 = gameScreen.getPlayer2();
 
-        if((this.x-(this.width/2+1) < p1.getX() + (p1.width/2) && (this.y - (this.height/2) >= p1.getY() - (p1.height/2) && this.y + (this.height/2) <= p1.getY()+(p1.height/2)))){
+
+        if(this.x-(this.width/2) <= p1.getX() + (p1.width/2) && (this.y + (this.height/2) >= p1.getY() - (p1.height/2) && this.y - (this.height/2) <= p1.getY()+(p1.height/2))){
             this.velX = -velX;
+            incSpeed();
         }
-        /*if((this.x+(this.width/2+1) > p2.getX() + (p2.width/2) && (this.y - (this.height/2) >= p2.getY() - (p2.height/2) && this.y + (this.height/2) <= p2.getY()+(p2.height/2)))){
+        if(this.x+(this.width) >= p2.getX() - (p2.width/2) && (this.y + (this.height/2) >= p2.getY() - (p2.height/2) && this.y - (this.height/2) <= p2.getY()+(p2.height/2))){
             this.velX = -velX;
-        }*/
+            incSpeed();
+        }
 
         this.body.setLinearVelocity(velX * speed ,velY * speed);
 
@@ -79,7 +82,7 @@ public class Ball {
     public void reset() {
         this.velX = getRandomDirection();
         this.velY = getRandomDirection();
-        this.speed = 100;
+        this.speed = 5;
         this.body.setTransform(Application.INSTANCE.getScreenWidth() / 2 / Const.PPM, Application.INSTANCE.getScreenHeight() / 2 / Const.PPM, 0);
     }
     public void render(SpriteBatch batch){
@@ -94,4 +97,8 @@ public class Ball {
     public void setSpeed(float speed) {
         this.speed = speed;
     }
+    public void incSpeed(){
+        this.speed *= 1.1f;
+    }
+
 }

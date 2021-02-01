@@ -23,7 +23,7 @@ public class Wall {
         this.height = 64;
 
         this.texture = new Texture("white.png");
-        this.body = BodyHelper.createBody(x,y,width,height, true, 0, gameScreen.getWorld(), ContactType.WALL);
+        this.body = BodyHelper.createBody(x, y,width,height, true, 0, gameScreen.getWorld(), ContactType.WALL);
     }
 
     public void render(SpriteBatch batch){
