@@ -23,7 +23,7 @@ public class Ball {
     public Ball(GameScreen gameScreen){
         this.x = Application.INSTANCE.getScreenWidth()/2;
         this.y = Application.INSTANCE.getScreenHeight()/2;
-        this.speed = 5;
+        this.speed = 100;
         this.gameScreen = gameScreen;
         this.texture = new Texture("white.png");
 
@@ -79,7 +79,7 @@ public class Ball {
     public void reset() {
         this.velX = getRandomDirection();
         this.velY = getRandomDirection();
-        this.speed = 5;
+        this.speed = 100;
         this.body.setTransform(Application.INSTANCE.getScreenWidth() / 2 / Const.PPM, Application.INSTANCE.getScreenHeight() / 2 / Const.PPM, 0);
     }
     public void render(SpriteBatch batch){
@@ -87,4 +87,11 @@ public class Ball {
 
     }
 
+    public void setVelX(float velX) {
+        this.velX = velX;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
 }

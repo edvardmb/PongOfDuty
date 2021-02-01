@@ -33,4 +33,7 @@ public class Player2 extends PlayerPaddle {
     public float getScore(){
         return this.score;
     }
+    public void resetScore(){
+        this.score = 0;
+    }
 }

@@ -31,8 +31,7 @@ public class GameScreen extends ScreenAdapter {
     private Ball ball;
     private Wall wallTop, wallBottom;
 
-    BitmapFont font, font2;
-
+    BitmapFont font, font2, font3;
 
 
     public GameScreen(OrthographicCamera camera){
@@ -50,9 +49,12 @@ public class GameScreen extends ScreenAdapter {
 
         font = new BitmapFont();
         font2 = new BitmapFont();
+        font3 = new BitmapFont();
         font.setColor(Color.RED);
         font.getData().setScale(2,2);
         font2.setColor(Color.BLACK);
+        font3.setColor(Color.RED);
+        font3.getData().setScale(5,5);
 
 
     }
@@ -91,6 +93,14 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
+    public boolean isGameOver(){
+        if (player1.getScore() == 21 || player2.getScore() == 21){
+            ball.setVelX(0);
+            ball.setSpeed(0);
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public void render(float delta){
@@ -100,12 +110,16 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        if(isGameOver()){
+            font3.draw(batch, "Game Over" , Application.INSTANCE.getScreenHeight()/2,Application.INSTANCE.getScreenWidth()/2 );
+        }
         this.player1.render(batch);
         this.player2.render(batch);
         this.ball.render(batch);
         this.wallTop.render(batch);
         this.wallBottom.render(batch);
-        font.draw(batch, (int) player1.getScore() + " - " +  (int) player2.getScore() , Application.INSTANCE.getScreenWidth()/2 ,Application.INSTANCE.getScreenHeight() -20    );
+
+        font.draw(batch, (int) player1.getScore() + " - " +  (int) player2.getScore() , Application.INSTANCE.getScreenWidth()/2 ,Application.INSTANCE.getScreenHeight() -20 );
         font2.draw(batch, "Control left side with W and S " , 20,40 );
         font2.draw(batch, "Control left side with up and down " , Application.INSTANCE.getScreenWidth()/2 + 240  ,40);
 
