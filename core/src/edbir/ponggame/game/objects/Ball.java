@@ -21,8 +21,8 @@ public class Ball {
     private Texture texture;
 
     public Ball(GameScreen gameScreen){
-        this.x = Application.INSTANCE.getScreenWidth()/2;
-        this.y = Application.INSTANCE.getScreenHeight()/2;
+        this.x = Application.getInstance().getScreenWidth()/2;
+        this.y = Application.getInstance().getScreenHeight()/2;
         this.speed = 5;
         this.gameScreen = gameScreen;
         this.texture = new Texture("white.png");
@@ -50,7 +50,7 @@ public class Ball {
             this.reset();
         }
 
-        if( x > Application.INSTANCE.getScreenWidth()){
+        if( x > Application.getInstance().getScreenWidth()){
             gameScreen.getPlayer1().score();
             this.reset();
         }
@@ -83,7 +83,7 @@ public class Ball {
         this.velX = getRandomDirection();
         this.velY = getRandomDirection();
         this.speed = 5;
-        this.body.setTransform(Application.INSTANCE.getScreenWidth() / 2 / Const.PPM, Application.INSTANCE.getScreenHeight() / 2 / Const.PPM, 0);
+        this.body.setTransform(Application.getInstance().getScreenWidth() / 2 / Const.PPM, Application.getInstance().getScreenHeight() / 2 / Const.PPM, 0);
     }
     public void render(SpriteBatch batch){
         batch.draw(texture, x, y, width, height);

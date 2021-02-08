@@ -12,6 +12,6 @@ public class DesktopLauncher {
 		config.height = 640;
 		config.foregroundFPS=60;
 		config.backgroundFPS=60;
-		new LwjglApplication(new Application(), config);
+		new LwjglApplication(Application.getInstance(), config);
 	}
 }

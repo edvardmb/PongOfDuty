@@ -36,16 +36,16 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(OrthographicCamera camera){
         this.camera = camera;
-        this.camera.position.set(new Vector3(Application.INSTANCE.screenWidth / 2, Application.INSTANCE.screenHeight/2, 0));
+        this.camera.position.set(new Vector3(Application.getInstance().screenWidth / 2, Application.getInstance().screenHeight/2, 0));
         this.batch = new SpriteBatch();
         this.world = new World(new Vector2(0,0), false);
         this.b2dr = new Box2DDebugRenderer();
 
-        this.player1 = new Player1(16, Application.INSTANCE.getScreenHeight() / 2, this);
-        this.player2 = new Player2(944, Application.INSTANCE.getScreenHeight() / 2, this);
+        this.player1 = new Player1(16, Application.getInstance().getScreenHeight() / 2, this);
+        this.player2 = new Player2(944, Application.getInstance().getScreenHeight() / 2, this);
         this.ball = new Ball( this);
         this.wallTop = new Wall(32, this);
-        this.wallBottom = new Wall(Application.INSTANCE.getScreenHeight()-32, this);
+        this.wallBottom = new Wall(Application.getInstance().getScreenHeight()-32, this);
 
         font = new BitmapFont();
         font2 = new BitmapFont();
@@ -111,7 +111,7 @@ public class GameScreen extends ScreenAdapter {
 
         batch.begin();
         if(isGameOver()){
-            font3.draw(batch, "Game Over" , Application.INSTANCE.getScreenHeight()/2,Application.INSTANCE.getScreenWidth()/2 );
+            font3.draw(batch, "Game Over" , Application.getInstance().getScreenHeight()/2,Application.getInstance().getScreenWidth()/2 );
         }
         this.player1.render(batch);
         this.player2.render(batch);
@@ -119,9 +119,9 @@ public class GameScreen extends ScreenAdapter {
         this.wallTop.render(batch);
         this.wallBottom.render(batch);
 
-        font.draw(batch, (int) player1.getScore() + " - " +  (int) player2.getScore() , Application.INSTANCE.getScreenWidth()/2 ,Application.INSTANCE.getScreenHeight() -20 );
+        font.draw(batch, (int) player1.getScore() + " - " +  (int) player2.getScore() , Application.getInstance().getScreenWidth()/2 ,Application.getInstance().getScreenHeight() -20 );
         font2.draw(batch, "Control left side with W and S " , 20,40 );
-        font2.draw(batch, "Control left side with up and down " , Application.INSTANCE.getScreenWidth()/2 + 240  ,40);
+        font2.draw(batch, "Control left side with up and down " , Application.getInstance().getScreenWidth()/2 + 240  ,40);
 
         batch.end();
 

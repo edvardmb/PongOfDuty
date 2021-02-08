@@ -17,9 +17,9 @@ public class Wall {
     private Texture texture;
 
     public Wall(float y, GameScreen gameScreen){
-        this. x = Application.INSTANCE.getScreenWidth()/2;
+        this. x = Application.getInstance().getScreenWidth()/2;
         this.y = y;
-        this.width = Application.INSTANCE.getScreenWidth();
+        this.width = Application.getInstance().getScreenWidth();
         this.height = 64;
 
         this.texture = new Texture("white.png");

@@ -9,14 +9,19 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sun.org.apache.xpath.internal.operations.Or;
 
-public class Application extends Game {
+public final class Application extends Game {
 
-	public static Application INSTANCE;
+	private static final Application INSTANCE = new Application();
+
+
 	public int screenWidth, screenHeight;
 	private OrthographicCamera orthographicCamera;
 
-	public Application (){
-		INSTANCE = this;
+	private Application (){
+	}
+
+	public static Application getInstance(){
+		return INSTANCE;
 	}
 
 	public int getScreenWidth() {
