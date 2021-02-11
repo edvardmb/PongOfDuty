@@ -9,13 +9,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sun.org.apache.xpath.internal.operations.Or;
 
+import edbir.ponggame.game.states.GameStateManager;
+import edbir.ponggame.game.states.MenuState;
+
 public final class Application extends Game {
 
 	private static final Application INSTANCE = new Application();
 
 
 	public int screenWidth, screenHeight;
-	private OrthographicCamera orthographicCamera;
 
 	private Application (){
 	}
@@ -32,13 +34,22 @@ public final class Application extends Game {
 		return screenHeight;
 	}
 
+	private GameStateManager gsm;
+	private SpriteBatch batch;
+
 	public void create () {
+		batch = new SpriteBatch();
+		gsm = new GameStateManager();
 		this.screenWidth = Gdx.graphics.getWidth();
 		this.screenHeight = Gdx.graphics.getHeight();
-		this.orthographicCamera = new OrthographicCamera();
-		this.orthographicCamera.setToOrtho(false, screenWidth, screenHeight);
+		gsm.push(new MenuState(gsm));
 
-		setScreen(new GameScreen(orthographicCamera));
+		//setScreen(new GameScreen(orthographicCamera));
+	}
+
+	public void render(){
+		gsm.update(Gdx.graphics.getDeltaTime());
+		gsm.render(batch);
 	}
 
 }

@@ -53,10 +53,6 @@ public class GameScreen extends ScreenAdapter {
         font.setColor(Color.RED);
         font.getData().setScale(2,2);
         font2.setColor(Color.BLACK);
-        font3.setColor(Color.RED);
-        font3.getData().setScale(5,5);
-
-
     }
 
     public World getWorld() {
@@ -88,15 +84,12 @@ public class GameScreen extends ScreenAdapter {
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
             this.ball.reset();
-
         }
 
     }
 
     public boolean isGameOver(){
         if (player1.getScore() == 21 || player2.getScore() == 21){
-            ball.setVelX(0);
-            ball.setSpeed(0);
             return true;
         }
         return false;
@@ -110,9 +103,6 @@ public class GameScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        if(isGameOver()){
-            font3.draw(batch, "Game Over" , Application.getInstance().getScreenHeight()/2,Application.getInstance().getScreenWidth()/2 );
-        }
         this.player1.render(batch);
         this.player2.render(batch);
         this.ball.render(batch);
@@ -121,11 +111,9 @@ public class GameScreen extends ScreenAdapter {
 
         font.draw(batch, (int) player1.getScore() + " - " +  (int) player2.getScore() , Application.getInstance().getScreenWidth()/2 ,Application.getInstance().getScreenHeight() -20 );
         font2.draw(batch, "Control left side with W and S " , 20,40 );
-        font2.draw(batch, "Control left side with up and down " , Application.getInstance().getScreenWidth()/2 + 240  ,40);
+        font2.draw(batch, "Control right side with up and down " , Application.getInstance().getScreenWidth()/2 + 240  ,40);
 
         batch.end();
 
     }
-
-
 }
